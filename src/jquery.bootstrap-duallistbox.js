@@ -146,7 +146,7 @@
 
     saveSelections(dualListbox, selectIndex);
 
-    dualListbox.elements['select'+selectIndex].empty().scrollTop(0);
+    dualListbox.elements['select'+selectIndex].html('').scrollTop(0);
     var regex = new RegExp($.trim(dualListbox.elements['filterInput'+selectIndex].val()), 'gi'),
       allOptions = dualListbox.element.find('option'),
       options = dualListbox.element;
@@ -164,7 +164,7 @@
         isFiltered = false;
         dualListbox.elements['select'+selectIndex].append($item.clone(true).prop('selected', $item.data('_selected')));
       }
-      allOptions.eq($item.data('original-index')).data('filtered'+selectIndex, isFiltered);
+      $(allOptions[$item.data('original-index')]).data('filtered'+selectIndex, isFiltered);
     });
 
     refreshInfo(dualListbox);
@@ -174,7 +174,7 @@
     var options = dualListbox.element.find('option');
     dualListbox.elements['select'+selectIndex].find('option').each(function(index, item) {
       var $item = $(item);
-      options.eq($item.data('original-index')).data('_selected', $item.prop('selected'));
+      $(options[$item.data('original-index')]).data('_selected', $item.prop('selected'));
     });
   }
 
